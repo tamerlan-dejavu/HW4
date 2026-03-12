@@ -17,9 +17,11 @@ Your raid engine should treat a single fighter and a group of fighters the same 
 2. Implement leaf units:
    - `HeroUnit`
    - `EnemyUnit`
+   done
 3. Implement composites:
    - `PartyComposite`
    - `RaidGroup`
+   
 4. Support nesting (a `RaidGroup` can contain `PartyComposite` and other `RaidGroup` objects).
 
 ### Required Behavior
