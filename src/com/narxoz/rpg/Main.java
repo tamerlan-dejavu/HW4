@@ -1,5 +1,7 @@
 package com.narxoz.rpg;
 
+import java.util.List;
+
 import com.narxoz.rpg.battle.RaidEngine;
 import com.narxoz.rpg.battle.RaidResult;
 import com.narxoz.rpg.bridge.AreaSkill;
@@ -27,26 +29,20 @@ public class Main {
         heroes.add(warrior);
         heroes.add(mage);
 
-        // Сложная вложенность: Взвод внутри Рейда
         PartyComposite enemiesFrontline = new PartyComposite("Frontline Squad");
         enemiesFrontline.add(goblin);
         enemiesFrontline.add(orc);
 
         RaidGroup enemyRaid = new RaidGroup("Enemy Army");
-        enemyRaid.add(enemiesFrontline); // Вложенность здесь
-        enemyRaid.add(boss);           // И прямой юнит рядом
+        enemyRaid.add(enemiesFrontline); 
+        enemyRaid.add(boss);           
 
         System.out.println("--- Hierarchy Structure ---");
         heroes.printTree("");
         enemyRaid.printTree("");
 
-        // 3. Комбинации Bridge (Демонстрация независимости)
-        
-        // Сценарий А: Тот же навык, разные эффекты
         Skill fireSlash = new SingleTargetSkill("Slash", 25, new FireEffect());
         Skill iceSlash = new SingleTargetSkill("Slash", 25, new IceEffect());
-
-        // Сценарий Б: Тот же эффект, разные типы навыков (Требование ТЗ)
         Skill fireArea = new AreaSkill("Firestorm", 15, new FireEffect());
         Skill shadowSingle = new SingleTargetSkill("Shadow Bolt", 40, new ShadowEffect());
         Skill shadowArea = new AreaSkill("Shadow Nova", 20, new ShadowEffect());
@@ -55,30 +51,6 @@ public class Main {
         System.out.println("1. Same Skill, Diff Effects: " + fireSlash.getEffectName() + " vs " + iceSlash.getEffectName());
         System.out.println("2. Same Effect, Diff Skills: " + shadowSingle.getSkillName() + " vs " + shadowArea.getSkillName());
 
-        // 4. Запуск рейда (Используем Singleton и Seed)
-        System.out.println("\n--- Starting Simulation ---");
         
-        // Вызываем через Singleton, как мы реализовали в RaidEngine
-        RaidEngine engine = RaidEngine.getInstance().setRandomSeed(12345L);
-        
-        // Проведем битву: Герои используют Shadow Nova, Враги - Fire Slash
-        RaidResult result = engine.runRaid(heroes, enemyRaid, shadowArea, fireSlash);
-
-        // 5. Вывод логов
-        System.out.println("\n--- Battle Log ---");
-        result.getLog().forEach(System.out::println);
-
-        System.out.println("\n--- Summary ---");
-        System.out.println("Winner: " + result.getWinner());
-        System.out.println("Total Rounds: " + result.getRounds());
-        System.out.println(" ");
-        System.out.println("Heroes tree after battle:");
-        heroes.printTree("");
-
-        System.out.println();
-        System.out.println("Monsters tree after battle:");
-        enemyRaid.printTree("");
-
-        System.out.println("\n=== Demo Complete ===");
     }
 }
