@@ -30,4 +30,8 @@ public abstract class Skill {
     }
 
     public abstract void cast(CombatNode target);
+
+    public EffectImplementor getEffect() {
+        return effect;
+    }
 }

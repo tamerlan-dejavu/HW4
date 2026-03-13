@@ -12,6 +12,6 @@ public class SingleTargetSkill extends Skill {
         if(target == null || !target.isAlive()){
             return;
         }
-        target.takeDamage(getBasePower());
+        target.takeDamage(resolvedDamage());
     }
 }
