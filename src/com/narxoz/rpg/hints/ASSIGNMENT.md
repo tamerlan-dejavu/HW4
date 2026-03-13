@@ -39,11 +39,13 @@ You need multiple skill types and multiple effect types. Creating class-per-comb
 
 ### Your Tasks
 1. Complete `EffectImplementor` interface.
+done
 2. Implement effect classes:
    - `PhysicalEffect`
    - `FireEffect`
    - `IceEffect`
    - `ShadowEffect`
+
 3. Complete abstract `Skill` class with effect delegation.
 4. Implement refined abstractions:
    - `SingleTargetSkill`
