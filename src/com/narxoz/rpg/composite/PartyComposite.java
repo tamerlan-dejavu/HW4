@@ -78,10 +78,15 @@ public class PartyComposite implements CombatNode {
 
     @Override
     public void printTree(String indent) {
-        System.out.println(indent + "+ " + name + " [HP=" + getHealth() + ", ATK=" + getAttackPower() + "]");
-        String childIndent = indent + "  ";
+        // System.out.println(indent + "+ " + name + " [HP=" + getHealth() + ", ATK=" + getAttackPower() + "]");
+        // String childIndent = indent + "  ";
+        // for (CombatNode child : children) {
+        //     child.printTree(childIndent);
+        // }
+        String status = isAlive() ? "ALIVE" : "DEFEATED";
+        System.out.println(indent + "+ " + name + " [" + status + ", TotalATK=" + getAttackPower() + "]");
         for (CombatNode child : children) {
-            child.printTree(childIndent);
+            child.printTree(indent + "   ");
         }
     }
 
