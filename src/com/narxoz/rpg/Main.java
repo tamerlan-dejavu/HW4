@@ -51,6 +51,28 @@ public class Main {
         System.out.println("1. Same Skill, Diff Effects: " + fireSlash.getEffectName() + " vs " + iceSlash.getEffectName());
         System.out.println("2. Same Effect, Diff Skills: " + shadowSingle.getSkillName() + " vs " + shadowArea.getSkillName());
 
+        System.out.println("--- Starting Simulation ---");
         
+        RaidEngine engine = RaidEngine.getInstance().setRandomSeed(42L);
+        List<Skill> heroDeck = List.of(shadowArea, iceSlash, fireSlash);
+        List<Skill> enemyDeck = List.of(fireSlash, fireArea, shadowArea);
+
+        RaidResult result = engine.runRaid(heroes, enemyRaid, heroDeck, enemyDeck);
+
+        System.out.println("\n--- Battle Log ---");
+        result.getLog().forEach(System.out::println);
+
+        System.out.println("\n--- Summary ---");
+        System.out.println("Winner: " + result.getWinner());
+        System.out.println("Total Rounds: " + result.getRounds());
+        System.out.println(" ");
+        System.out.println("Heroes tree after battle:");
+        heroes.printTree("");
+
+        System.out.println();
+        System.out.println("Monsters tree after battle:");
+        enemyRaid.printTree("");
+
+        System.out.println("\n=== Demo Complete ===");
     }
 }

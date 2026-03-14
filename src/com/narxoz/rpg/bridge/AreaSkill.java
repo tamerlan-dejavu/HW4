@@ -10,17 +10,17 @@ public class AreaSkill extends Skill {
     @Override
     public void cast(CombatNode target) {
         if (target == null || !target.isAlive()) return;
-        applyRecursiveAreaDamage(target, resolvedDamage());
+        applyDamage(target, resolvedDamage());
     }
 
-    private void applyRecursiveAreaDamage(CombatNode node, int damage) {
+    private void applyDamage(CombatNode node, int damage) {
     if (node.getChildren().isEmpty()) {
         node.takeDamage(damage); 
     } 
     else {
         for (CombatNode child : node.getChildren()) {
             if (child.isAlive()) {
-                applyRecursiveAreaDamage(child, damage);
+                applyDamage(child, damage);
             }
         }
     }
