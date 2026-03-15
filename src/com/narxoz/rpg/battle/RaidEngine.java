@@ -35,7 +35,7 @@ public class RaidEngine {
         result.addLine("--------------------------");
 
         int rounds = 0;
-        while (teamA.isAlive() && teamB.isAlive() && rounds < 100) {
+        while (teamA.isAlive() && teamB.isAlive()) {
             rounds++;
             result.addLine("--- Round " + rounds + " ---");
             if (teamA.isAlive() ) {
